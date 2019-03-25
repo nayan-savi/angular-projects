@@ -1,0 +1,7 @@
+<form>
+  <label>File1:</label><input type="file" name="srcFile" ng2FileSelect [uploader]="uploader" />
+  <label>File2:</label><input type="file" name="destFile" ng2FileSelect [uploader]="uploader" />
+  <button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+    Process
+  </button>
+</form>
