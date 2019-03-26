@@ -13,6 +13,7 @@ export class RuleComponent implements OnInit {
   @Input() srcheaders: string[];
   @Input() destheaders: string[];
   actions: string[];
+  isHidden = false;
   constructor(private fb: FormBuilder) { 
     this.actions = [">","<","="];
   }
@@ -32,6 +33,7 @@ export class RuleComponent implements OnInit {
   }
 
   addNewColumn(): void {
+    this.isHidden = true;
     const control = <FormArray>this.form.controls.ruleColumns;
     control.push(this.initColums());
   }

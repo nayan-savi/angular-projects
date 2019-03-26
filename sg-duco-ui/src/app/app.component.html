@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="width: 60%;">
   <table class="table table-light">
     <tr style="text-align: center">
       <td colspan="2">
@@ -7,12 +7,14 @@
     </tr>
     <tr>
       <td>
+        <label><b>Source</b></label>
         <input type="file" name="srcFile" ng2FileSelect [uploader]="uploader1" class="btn btn-secondary">
       </td>
       <td>
+        <label><b>Destination</b></label>
         <input type="file" name="destFile" ng2FileSelect [uploader]="uploader2" class="btn btn-secondary">
       </td>
-      <td>
+      <td style="vertical-align:bottom; padding-bottom: 15px;">
         <button type="button" class="btn btn-success btn-s" [disabled]="!uploader1.getNotUploadedItems().length || !uploader2.getNotUploadedItems().length"
           (click)="uploader1.uploadAll() || uploader2.uploadAll()">
           Process
