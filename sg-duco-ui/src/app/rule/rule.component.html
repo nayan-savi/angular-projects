@@ -1,19 +1,35 @@
 <form [formGroup]="form" (ngSubmit)="manage(form.value)">
-  <button (click)="addNewColumn()">Add Coulmn</button>
 
-  <div formArrayName="ruleColumns">
-    <div [formGroupName]="form" *ngFor="let column of form.controls.ruleColumns.controls; let i = index">
-      <select formControlName="">
-        <option [value]="country" *ngFor="let country of countries"> {{country}}</option>
-      </select>
-      <select formControlName="{{index}}">
-        <option [value]="country" *ngFor="let country of countries"> {{country}}</option>
-      </select>
-      <button (click)="removeColumn(i)">
-        Remove
-      </button>
-    </div>
-  </div>
+  <table border="1">
+    <tr>
+      <td colspan="3"><button (click)="addNewColumn()">Add Coulmn</button></td>
+    </tr>
+    <tr>
+      <td>File1</td>
+      <td>File2</td>
+      <td>Actions</td>
+    </tr>
+    <tr>
+      <div formArrayName="ruleColumns">
+        <div [formGroupName]="i" *ngFor="let column of form.controls.ruleColumns.controls; let i = index">
+          <th>
+            <select formControlName="srcColumn">
+              <option [value]="country" *ngFor="let country of countries">{{country}}</option>
+            </select>
+          </th>
+          <th>
+            <select formControlName="destColumn">
+              <option [value]="country" *ngFor="let country of countries">{{country}}</option>
+            </select>
+          </th>
+          <th>
+            <button (click)="removeColumn(i)">Delete</button>
+          </th>
+        </div>
+      </div>
+    </tr>
+  </table>
 
-  <button [disabled]="form.valid">Submit</button>
+
+  <button [disabled]="!form.valid">Submit</button>
 </form>

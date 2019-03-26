@@ -15,25 +15,26 @@ export class RuleComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      ruleColumns: this.fb.array([this.initColums()])
+      ruleColumns: this.fb.array([])
     });
   }
 
   initColums(): FormGroup {
     return this.fb.group({
       srcColumn: ['', Validators.required],
-      destColumn: ['', Validators.required]
+      destColumn: ['', Validators.required],
+      action: ['', Validators.required]
     });
   }
 
   addNewColumn(): void {
-    const rules = <FormArray>this.form.controls.ruleColumns;
-    rules.push(this.initColums());
+    const control = <FormArray>this.form.controls.ruleColumns;
+    control.push(this.initColums());
   }
 
   removeColumn(index: number): void {
-    const rules = <FormArray>this.form.controls.ruleColumns;
-    rules.removeAt(index);
+    const control = <FormArray>this.form.controls.ruleColumns;
+    control.removeAt(index);
   }
 
   manage(val: any): void {
