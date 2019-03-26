@@ -1,8 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms'
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { ReportService } from '../report.service';
 
-const GENERATE_URL = 'http://localhost:3000/api/generate';
+
 
 @Component({
   selector: 'app-rule',
@@ -15,8 +17,8 @@ export class RuleComponent implements OnInit {
   @Input() srcheaders: string[];
   @Input() destheaders: string[];
   actions: string[];
-  isHidden = false;
-  constructor(private fb: FormBuilder, private http: HttpClient) {
+  constructor(private fb: FormBuilder, private http: HttpClient,
+    private reportService: ReportService) {
     this.actions = [">", "<", "="];
   }
 
@@ -35,7 +37,6 @@ export class RuleComponent implements OnInit {
   }
 
   addNewColumn(): void {
-    this.isHidden = true;
     const control = <FormArray>this.form.controls.ruleColumns;
     control.push(this.initColums());
   }
@@ -46,19 +47,12 @@ export class RuleComponent implements OnInit {
   }
 
   generateReport(value: any): void {
-    console.log("=====>")
-    let input = JSON.stringify(value.ruleColumns);
-    console.log(typeof input);
-    this.http.post(GENERATE_URL, {
-      input
-    }).subscribe(
-      data => {
-        console.log(data)
-      },
-      error => {
-
-      });
-    console.log();
+    this.reportService.getReportService(value)
+      .subscribe(res => {
+        console.log(`RESULT: ===> ${res}`);
+      }, err => {
+        console.log(`ERROR: ===> ${err}`);
+      })
   }
 
 }
