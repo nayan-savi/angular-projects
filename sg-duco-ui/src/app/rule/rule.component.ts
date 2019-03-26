@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms'
+import { HttpClient } from '@angular/common/http';
+
+const GENERATE_URL = 'http://localhost:3000/api/generate';
 
 @Component({
   selector: 'app-rule',
@@ -9,13 +12,12 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms'
 export class RuleComponent implements OnInit {
 
   form: FormGroup;
-
   @Input() srcheaders: string[];
   @Input() destheaders: string[];
   actions: string[];
   isHidden = false;
-  constructor(private fb: FormBuilder) { 
-    this.actions = [">","<","="];
+  constructor(private fb: FormBuilder, private http: HttpClient) {
+    this.actions = [">", "<", "="];
   }
 
   ngOnInit() {
@@ -43,8 +45,20 @@ export class RuleComponent implements OnInit {
     control.removeAt(index);
   }
 
-  manage(val: any): void {
-    console.dir(val);
+  generateReport(value: any): void {
+    console.log("=====>")
+    let input = JSON.stringify(value.ruleColumns);
+    console.log(typeof input);
+    this.http.post(GENERATE_URL, {
+      input
+    }).subscribe(
+      data => {
+        console.log(data)
+      },
+      error => {
+
+      });
+    console.log();
   }
 
 }
