@@ -1,0 +1,19 @@
+<form [formGroup]="form" (ngSubmit)="manage(form.value)">
+  <button (click)="addNewColumn()">Add Coulmn</button>
+
+  <div formArrayName="ruleColumns">
+    <div [formGroupName]="form" *ngFor="let column of form.controls.ruleColumns.controls; let i = index">
+      <select formControlName="">
+        <option [value]="country" *ngFor="let country of countries"> {{country}}</option>
+      </select>
+      <select formControlName="{{index}}">
+        <option [value]="country" *ngFor="let country of countries"> {{country}}</option>
+      </select>
+      <button (click)="removeColumn(i)">
+        Remove
+      </button>
+    </div>
+  </div>
+
+  <button [disabled]="form.valid">Submit</button>
+</form>
