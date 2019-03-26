@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms'
 
 @Component({
@@ -10,8 +10,12 @@ export class RuleComponent implements OnInit {
 
   form: FormGroup;
 
-  countries = ['USA', 'Canada', 'Uk']
-  constructor(private fb: FormBuilder) { }
+  @Input() srcheaders: string[];
+  @Input() destheaders: string[];
+  actions: string[];
+  constructor(private fb: FormBuilder) { 
+    this.actions = [">","<","="];
+  }
 
   ngOnInit() {
     this.form = this.fb.group({

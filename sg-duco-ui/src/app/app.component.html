@@ -1,9 +1,27 @@
-<label>File1:</label><input type="file" name="srcFile" ng2FileSelect [uploader]="uploader" />
-<label>File2:</label><input type="file" name="destFile" ng2FileSelect [uploader]="uploader" />
-<button type="button" class="btn btn-success btn-s" (click)="uploader.uploadAll()">
-  Process
-</button>
+<div class="container">
+  <table class="table table-light">
+    <tr>
+      <td>
+        <div class="custom-file">
+          <input type="file" name="srcFile" ng2FileSelect [uploader]="uploader1" class="custom-file-input" id="customFile">
+          <label class="custom-file-label" for="customFile">Choose src file</label>
+        </div>
+      </td>
+      <td>
+        <div class="custom-file">
+          <input type="file" name="destFile" ng2FileSelect [uploader]="uploader2" class="custom-file-input" id="customFile">
+          <label class="custom-file-label" for="customFile">Choose dest file</label>
+        </div>
+      </td>
+      <td>
+        <button type="button" class="btn btn-success btn-s" [disabled]="!uploader1.getNotUploadedItems().length || !uploader2.getNotUploadedItems().length"
+          (click)="uploader1.uploadAll() || uploader2.uploadAll()">
+          Process
+        </button>
+      </td>
+    </tr>
+  </table>
+</div>
 
-
-<!-- [disabled]="!uploader.getNotUploadedItems().length" -->
-<app-rule></app-rule>
+<app-rule *ngIf="srcData != undefined" [srcheaders]="srcData" [destheaders]="destData"></app-rule>
+<!-- <app-rule></app-rule> -->

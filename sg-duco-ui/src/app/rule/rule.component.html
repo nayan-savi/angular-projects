@@ -1,35 +1,40 @@
 <form [formGroup]="form" (ngSubmit)="manage(form.value)">
-
-  <table border="1">
-    <tr>
-      <td colspan="3"><button (click)="addNewColumn()">Add Coulmn</button></td>
-    </tr>
-    <tr>
-      <td>File1</td>
-      <td>File2</td>
-      <td>Actions</td>
-    </tr>
-    <tr>
-      <div formArrayName="ruleColumns">
-        <div [formGroupName]="i" *ngFor="let column of form.controls.ruleColumns.controls; let i = index">
-          <th>
-            <select formControlName="srcColumn">
-              <option [value]="country" *ngFor="let country of countries">{{country}}</option>
-            </select>
-          </th>
-          <th>
-            <select formControlName="destColumn">
-              <option [value]="country" *ngFor="let country of countries">{{country}}</option>
-            </select>
-          </th>
-          <th>
-            <button (click)="removeColumn(i)">Delete</button>
-          </th>
-        </div>
-      </div>
-    </tr>
-  </table>
-
-
-  <button [disabled]="!form.valid">Submit</button>
+  <div class="container">
+    <table formArrayName="ruleColumns" class="table table-light">
+      <tr>
+        <td colspan="4"><button (click)="addNewColumn()" class="btn btn-outline-primary">Add Coulmn</button></td>
+      </tr>
+      <tr style="text-align:center" class="thead-light">
+        <th>Source</th>
+        <th>Destination</th>
+        <th>Actions</th>
+        <th></th>
+      </tr>
+      <tr style="text-align:center" [formGroupName]="i" *ngFor="let column of form.controls.ruleColumns.controls; let i = index">
+        <td>
+          <select formControlName="srcColumn" class="form-control">
+            <option [value]="src" *ngFor="let src of srcheaders">{{src}}</option>
+          </select>
+        </td>
+        <td>
+          <select formControlName="destColumn" class="form-control">
+            <option [value]="dest" *ngFor="let dest of destheaders">{{dest}}</option>
+          </select>
+        </td>
+        <td>
+          <select formControlName="action" class="form-control">
+            <option [value]="action" *ngFor="let action of actions">{{action}}</option>
+          </select>
+        </td>
+        <td style="width:50px">
+          <button (click)="removeColumn(i)" class="btn btn-outline-danger">Delete</button>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="4" style="text-align:right">
+          <button [disabled]="!form.valid" class="btn btn-outline-success">Generate Report</button>
+        </td>
+      </tr>
+    </table>
+  </div>
 </form>
