@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FileUploader, FileSelectDirective } from 'ng2-file-upload/ng2-file-upload';
+import { Component, OnInit } from '@angular/core';
+import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
 
 const SRC_URL = 'http://localhost:3000/api/src';
