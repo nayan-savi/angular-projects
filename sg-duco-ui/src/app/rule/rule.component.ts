@@ -17,6 +17,7 @@ export class RuleComponent implements OnInit {
   @Input() srcheaders: string[];
   @Input() destheaders: string[];
   actions: string[];
+  print:any;
   constructor(private fb: FormBuilder, private http: HttpClient,
     private reportService: ReportService) {
     this.actions = [">", "<", "="];
@@ -49,6 +50,7 @@ export class RuleComponent implements OnInit {
   generateReport(value: any): void {
     this.reportService.getReportService(value)
       .subscribe(res => {
+        this.print = JSON.stringify(res);
         console.log(`RESULT: ===> ${res}`);
       }, err => {
         console.log(`ERROR: ===> ${err}`);
