@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+.main-display{
+    width: 500px;
+}
+
+.input-form{
+    height: 70px;
+}
+
+label {
+    font-family: system-ui;
+    font-size: 14px;
+    color: red
+}
+
+input, select {
+    width: 309px;
+    padding: 6px 6px;
+    margin: 3px 0;
+    display: flow-root;
+    border: 1px solid #808080;
+    /*border-radius: 4px; */
+    box-sizing: border-box;
+    font-family: system-ui;
+    font-size: 14px;
+
+}
+
